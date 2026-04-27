@@ -1,0 +1,73 @@
+Music sites:
+
+https://tabletopaudio.com/
+https://mixkit.co/free-stock-music/mood/atmospheric/?page=4
+
+Похожая игра  - где нужно добавлять планеты:
+https://www.stefanom.org/spc/index.html
+
+1. Orbital Traffic
+Player controls timing of planets or satellites orbiting a star so they do not collide.
+
+Tap to speed up / slow down specific orbits; later levels add more orbits, crossing paths, and special “shield” orbits that can temporarily overlap.
+
+
+==========
+add asteroids in future levels, add spaceships
+add planets like Neptun with more advanced its own orbits
+add different images for different planet systems (our, Alfa Centaura, etc.) with unique planets design, background desing, etc.
+shield as superpower - you can buy it with gotten баллы
+in more advanced levels appear additional control for ellipses length
+in advanced levels appear - spaccraft - so user need to adjust speed to avoid collision with this spaceship
+After 10 non successfull tries, appear a button -solve the puzzle
+
+\
+New Gameplay Concepts Introduced
+Levels 8-12: Intermediate Mastery
+Level 8 "Speed Demons": High-speed planets (1.5-2.3x) requiring constant attention
+Level 9 "Eccentric Paths": Highly elongated ellipses creating unpredictable crossing patterns
+Level 10 "Nested Chaos": Concentric circular orbits with inverse speed relationships
+Level 11 "The Gauntlet": Dense traffic with NO shields - pure skill test
+Level 12 "Shield Symphony": 3 shields to manage complex situations
+Levels 13-18: Advanced Challenges
+Level 13 "Asymmetric Assault": All planets clustered to one side
+Level 14 "Time Pressure": 60-second endurance test
+Level 15 "Velocity Variance": Extreme speed differences (0.4x to 3.2x)
+Level 16 "Figure Eight": Mirrored orbits creating crossing patterns
+Level 17 "Rush Hour": 8 planets, 20 seconds, extreme speeds
+Level 18 "The Crucible": Balanced 8-planet intensity test
+Levels 19-24: Expert Tier
+Level 19 "Precision Timing": 9 planets with narrow crossing windows
+Level 20 "Orbital Overload": 9 planets with maximum chaos
+Level 21 "Marathon": 75-second survival challenge
+Level 22 "Hyperdrive": Extreme speeds (3.3-4.1x) - reaction test
+Level 23 "Mega Mayhem": 10 planets enter the danger zone
+Level 24 "Perfect Storm": Everything combined - speed + density + chaos
+Levels 25-30: Master Tier
+Level 25 "Titan's Challenge": 10 planets for 60 seconds
+Level 26 "Chaos Theory": 11 planets - pure unpredictability
+Level 27 "Insanity": 12 planets - maximum complexity
+Level 28 "The Void": 90-second final endurance
+Level 29 "Apocalypse": 12 planets at max speed (3.1-4.1x)
+Level 30 "SINGULARITY": Ultimate test - 12 planets for 100 seconds!
+📊 Difficulty Progression Features
+Planet Count: 3 → 12 planets (gradual increase)
+Speed Range: 0.4x to 4.1x (huge variety)
+Duration: 20 to 100 seconds (endurance scaling)
+Shield Strategy: 0-5 shields per level (strategic placement)
+🎯 Interesting Mechanics
+No-Shield Levels (11, 17): Pure speed management
+Shield-Heavy Levels (12, 25-30): Strategic shield timing
+Speed Extremes (15, 22, 29): Mix of crawl and sprint speeds
+Endurance Tests (14, 21, 28, 30): Long-term survival
+Sprint Challenges (11, 17): Quick intense bursts
+Pattern-Based (10, 16, 19): Specific orbital arrangements
+Asymmetric (13): Unbalanced layouts
+Maximum Density (26-30): 11-12 planets simultaneously
+
+
+
+Shadow Match
+Screen shows a complex silhouette built of simple SVG shapes; below are draggable basic shapes.
+
+Player must arrange pieces to match the shadow outline. Difficulty increases with more shapes, rotated pieces, and mirrored variants.
