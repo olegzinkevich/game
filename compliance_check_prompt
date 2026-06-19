@@ -1,0 +1,10 @@
+> _You are a code-compliance auditor. For the app source code:
+> "D:\dev\tetris_game\src", evaluate **each**  requirement atom in 
+>  "D:\dev\tetris_game\requirements_doc\requirements.md". Read the "D:\dev\tetris_game\requirements_doc\README.md" to better understand the requirements structure. For each `id`, decide whether the EARS requirement  
+> holds and the Gherkin acceptance would pass, judging **only from the source code**.  
+> Output one row per `id` CSV: `id,status,confidence where  
+> `status ∈ {satisfied, partial, not-satisfied, not-found}`, and `confidence ∈ [0,1]`. 
+> Do not check the ids, which have verify_method=manual, filter them out. Beside them do not skip any id. If the code is insufficient  
+> to tell, use `status=not-found` with low confidence. Be conservative: do not assume  
+> behavior that is not in the code.
+> Save output to D:\dev\tetris_game\compliance_check\claude_opus_4_8.csv
