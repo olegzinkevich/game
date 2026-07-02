@@ -1,0 +1,11 @@
+2 questions we need to answer:
+Reliability - Does the model agree with itself over multiple runs (is it hallucinating)?
+Validity - Does the model agree with the Ground Truth (assessors check).
+
+Good LLM is reliable (no deviation between runs) and match Ground Truth (assessors check).
+Reliability (Fleiss' kappa) tells us whether it repeats itself; validity (accuracy vs. human experts) tells us whether it's right.
+
+ Kappa answers reliability only — "is it consistent."  "is it correct." That's acc_gt (accuracy vs. the human experts). The best model is
+  the one that is high on both:
+
+Claude is the most reliable (kappa 0.67) and the most valid (acc_gt 0.84)
