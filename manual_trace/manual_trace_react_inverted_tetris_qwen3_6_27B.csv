@@ -1,0 +1,65 @@
+ID,Title,Description,Priority,Verify,Status
+FR-LIFE-002,Start spawns first figure and starts rise,"On Start, spawn first figure at bottom-center and start the rise timer.",must,llm-judge,satisfied
+FR-LIFE-004,Pause stops rise and timer,"On pause, stop the active figure rising and stop the rise timer.",must,llm-judge,satisfied
+FR-LIFE-005,Pause ignores gameplay input,"While paused, ignore all input except Resume.",must,llm-judge,satisfied
+FR-LIFE-006,Resume restores identical state,"On resume, continue from the identical state that existed before pausing.",must,llm-judge,satisfied
+FR-LIFE-007,Restart resets state,"On Restart after game over, reset board, score, level, and lines and begin a fresh game.",must,llm-judge,satisfied
+FR-LIFE-008,Tab blur auto-pause without runaway loops,"On tab blur/background, auto-pause or continue deterministically with exactly one loop and no runaway timers on refocus.",should,llm-judge,satisfied
+FR-GRID-001,Playfield dimensions,Provide a playfield 15 cells wide and 35 cells high.,must,llm-judge,satisfied
+FR-GRID-002,Cell state,Represent each cell as empty or filled with a specific figure color/type.,must,llm-judge,satisfied
+FR-PIECE-001,Exactly four figures exist,"Provide exactly four figures I, P, L, C with the specified geometry and no others.",must,llm-judge,satisfied
+FR-PIECE-002,Figure colors,"Render each figure in its assigned color (I=#30b5c5, P=#c00000, L=#ED6D00, C=#a0d183).",should,llm-judge,satisfied
+FR-PIECE-003,Three cells per figure,Compose each figure of exactly three cells.,must,llm-judge,satisfied
+FR-PIECE-004,Spawn position centered at bottom,"On spawn, place figure at bottom, horizontally centered via x=floor(fieldWidth/2)-floor(pieceWidth/2), standard orientation.",must,llm-judge,satisfied
+FR-CFG-001,Base rise interval,Use a base rise interval of 500 ms at the starting level.,must,llm-judge,satisfied
+FR-CFG-002,Minimum rise interval,Never let the rise interval fall below 50 ms.,must,llm-judge,need code check
+FR-CFG-003,Lines per level,Require 10 cleared lines to advance one level.,must,llm-judge,satisfied
+FR-SPAWN-001,4-bag randomizer,Generate spawn order with a 4-bag randomizer so each bag of four has no duplicate or starved figure.,must,llm-judge,satisfied
+FR-SPAWN-002,Next preview matches spawn,Display a Next preview whose shown figure matches the actual next spawned figure.,must,llm-judge,not-satisfied
+FR-SPAWN-003,Hold swap once per figure,"On Hold, swap active with held figure, at most once per figure until it locks.",should,llm-judge,not-satisfied
+FR-MOVE-006,Inverted gravity — figures rise,"Move active figures upward (inverse gravity), locking against the top wall or underside of the stack.",must,llm-judge,partially
+FR-MOVE-001,Horizontal move by one column,"On Left/Right, move the figure exactly one column if target cells are empty and in bounds.",must,llm-judge,satisfied
+FR-MOVE-002,Blocked horizontal move rejected,"Reject a Left/Right move that crosses a boundary or overlaps a locked cell, leaving figure unchanged.",must,llm-judge,satisfied
+FR-MOVE-003,Automatic rise ascent,Move the active figure up one cell automatically every rise tick.,must,llm-judge,partially
+FR-MOVE-004,Soft rise accelerates ascent,"While Soft Rise is held, accelerate ascent beyond the normal rise rate.",must,llm-judge,satisfied
+FR-MOVE-005,Hard rise locks instantly,"On Hard Rise, move the figure to its topmost landing position and lock it there.",must,llm-judge,satisfied
+FR-ROT-001,Rotate 90 degrees about pivot,"On rotate, rotate 90 degrees in the requested direction about the standard pivot.",must,llm-judge,satisfied
+FR-ROT-002,Wall kicks,"On a colliding rotation, apply the first valid kick-table offset that yields a non-colliding position.",should,llm-judge,satisfied
+FR-ROT-003,Impossible rotation rejected,"If rotation collides with no valid kick, reject it and leave the figure unchanged.",must,llm-judge,satisfied
+FR-COL-001,Collision integrity invariant,Never allow an active-figure cell to overlap an occupied cell or exit left/right/top bounds.,must,llm-judge,satisfied
+FR-LOCK-001,Lock on landing and spawn next,"When the figure can no longer rise, lock it into the board and spawn a new figure.",must,llm-judge,partially
+FR-LOCK-002,Bounded lock delay,Allow movement/rotation during a bounded lock delay (~500 ms) without indefinite stalling.,should,llm-judge,not-satisfied
+FR-GHOST-001,Ghost figure matches landing,Display a ghost figure marking the exact hard-rise landing cells.,should,llm-judge,satisfied
+FR-CLEAR-001,Single line clear,"On lock with exactly one full row, remove that row and shift rows below it up by one.",must,llm-judge,satisfied
+FR-CLEAR-002,Double line clear,"On lock with exactly two full rows, clear both in a single step.",must,llm-judge,satisfied
+FR-CLEAR-003,Triple line clear,"On lock with exactly three full rows, clear all three in a single step.",must,llm-judge,satisfied
+FR-CLEAR-004,Maximum three rows per lock,Never clear more than three rows from a single lock (no four-line clears in this variant).,must,llm-judge,satisfied
+FR-CLEAR-005,Non-contiguous clears preserve gaps,"Remove only filled rows and settle remaining blocks upward, preserving partial-row gaps.",must,llm-judge,satisfied
+FR-CLEAR-006,No false clear,Do not clear any row that contains an empty cell.,must,llm-judge,satisfied
+FR-SCORE-001,Score monotonic and non-negative,Keep the score monotonically non-decreasing and never negative.,must,llm-judge,not-satisfied
+FR-SCORE-002,Line-clear scoring scale,Award 100xL / 300xL / 500xL for 1/2/3 lines cleared at level L.,must,llm-judge,not-satisfied
+FR-SCORE-003,Lines counter increments exactly,Increase the lines-cleared counter by exactly the number of rows cleared on a lock.,must,llm-judge,not-satisfied
+FR-SCORE-004,Soft/hard rise points,Award 1 point per cell via soft rise and 2 points per cell via hard rise.,should,llm-judge,not-satisfied
+FR-SCORE-005,High score persists across reloads,Persist the high score (localStorage or analog) so it survives a page reload.,should,llm-judge,not-satisfied
+FR-LEVEL-001,Level increases every 10 lines,Increase the level by one for every 10 lines cleared since the last level-up.,must,llm-judge,not-satisfied
+FR-LEVEL-002,Rise speeds up with level,"On level increase, set rise interval to max(50, 500/(level+1)) ms.",must,llm-judge,satisfied
+FR-OVER-001,Block-out ends game,"When a new figure immediately collides at the bottom spawn area, set status gameover and stop the rise loop.",must,llm-judge,satisfied
+FR-OVER-002,Game-over screen with score and restart,"On game over, display a game-over screen showing the final score and a Restart action.",must,llm-judge,not-satisfied
+FR-OVER-003,No board mutation after game over,"While game over, ignore gameplay input that would mutate the board.",must,llm-judge,satisfied
+FR-OVER-004,No spawn after game over until restart,"While game over, do not spawn a new figure until the user restarts.",must,llm-judge,satisfied
+FR-ARCH-001,Timer-driven game cycle,Drive the game cycle with a timer (setInterval or requestAnimationFrame with a time check).,must,llm-judge,need code check
+FR-ARCH-002,2D array field representation,Represent the field as a 15x35 2D array with 0 empty and 1..4 identifying figure color.,should,llm-judge,need code check
+FR-CTRL-001,Keyboard bindings for must-have actions,"Bind move (arrows), soft rise (Up), hard rise (Space), rotate (X/Z/Ctrl), Hold (C/Shift), Pause (Esc/P), Restart (R).",must,llm-judge,satisfied
+FR-CTRL-003,Deterministic repeat and simultaneous keys,"Handle key repeat without missed/doubled input and resolve simultaneous keys deterministically, keeping collision invariants.",should,llm-judge,satisfied
+FR-CTRL-005,Suppress browser default gestures,"While playing, suppress default behaviors so arrows/Space do not scroll and touch gestures do not zoom.",must,llm-judge,satisfied
+UI-HUD-001,HUD shows and updates score/level/lines,"Always display current score, level, and lines and update them immediately on change.",must,llm-judge,not-satisfied
+UI-LAYOUT-001,Side panel content,"Present a side panel with score, level, lines, Next preview, New Game/Restart, and a Game Over indicator.",must,llm-judge,partially
+NFR-A11Y-004,Accessible names and canvas label,Give interactive elements accessible names/labels and the canvas a meaningful aria-label/role.,should,llm-judge,need code check
+NFR-COMPAT-003,Graceful optional-API fallback,Do not depend on experimental/flagged APIs and degrade gracefully when an optional API is unavailable.,should,llm-judge,need code check
+NFR-COMPAT-004,Static HTTPS hosting,Run over plain HTTPS with no server-side runtime dependency (static-hosting compatible).,must,llm-judge,need code check
+FR-ERR-001,Input spam safe,"On many inputs within one frame, do not crash, enter an illegal state, or double-move; keep collision invariants.",must,llm-judge,satisfied
+FR-ERR-002,Concurrent rotate+move+rise deterministic,Resolve simultaneous rotate/move/rise deterministically without overlap or escaping bounds.,must,llm-judge,satisfied
+FR-ERR-003,Hard rise into full column,"On hard rise into a full/near-full column, lock correctly at the bottom entry (may trigger game over) without crashing.",must,llm-judge,satisfied
+FR-ERR-005,localStorage unavailable degrades gracefully,"If localStorage is unavailable/quota-exceeded/private, degrade persistence gracefully and stay playable.",should,llm-judge,need code check
+FR-ERR-006,Corrupt persisted data falls back,"On corrupt/invalid persisted data, validate and fall back to defaults without crashing.",should,llm-judge,need code check
+FR-ERR-008,Graceful unhandled-error handling,"On an unhandled error, catch and surface it gracefully with no white screen and no infinite error loop.",must,llm-judge,need code check
