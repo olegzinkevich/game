@@ -1,0 +1,55 @@
+ID,Title,Description,Priority,Verify,Status
+FR-CFG-003,Lines per level,10 cleared lines are required to advance one level,must,llm-judge,satisfied
+FR-CLEAR-001,Single line clear,Locking with exactly one full row removes it and shifts rows above down by one,must,llm-judge,satisfied
+FR-CLEAR-002,Double line clear,Locking with exactly two full rows clears both in a single step,must,llm-judge,satisfied
+FR-CLEAR-003,Triple line clear,Locking with exactly three full rows clears all three in a single step,must,llm-judge,satisfied
+FR-CLEAR-004,Tetris (quad) clear,Locking with exactly four full rows clears all four in a single step,must,llm-judge,satisfied
+FR-CLEAR-005,Non-contiguous clears preserve gaps,Only filled rows are removed and remaining blocks settle preserving partial-row gaps,must,llm-judge,satisfied
+FR-CLEAR-006,No false clear,A row containing any empty cell is never cleared,must,llm-judge,satisfied
+FR-COL-001,Collision integrity invariant,No active-piece cell ever overlaps an occupied cell or exits left/right/bottom bounds,must,llm-judge,satisfied
+FR-CTRL-001,Keyboard bindings,"Bindings: arrows move/soft-drop, Space hard-drop, Up/X & Z/Ctrl rotate, C/Shift hold, Esc/P pause, R restart",must,llm-judge,not-satisfied
+FR-CTRL-003,Deterministic repeat / simultaneous keys,Key repeat has no missed/doubled inputs; simultaneous keys resolve deterministically,should,llm-judge,satisfied
+FR-CTRL-005,Suppress browser default gestures,Arrows/Space do not scroll the page and touch gestures do not zoom during play,must,llm-judge,satisfied
+FR-ERR-001,Input spam safe,Many inputs within one frame cause no crash/illegal state/double-move; invariants hold,must,llm-judge,satisfied
+FR-ERR-002,Concurrent rotate+move+drop deterministic,Simultaneous rotate/move/drop resolve deterministically without overlap or escaping bounds,must,llm-judge,satisfied
+FR-ERR-003,Hard drop into full column,Hard drop into a full/near-full column locks correctly at top (may game over) without crashing,must,llm-judge,not-satisfied
+FR-ERR-005,localStorage unavailable degrades,If localStorage is unavailable/quota/private (persistence degrades gracefully and game stays playable),should,llm-judge,need code check
+FR-GHOST-001,Ghost piece matches landing,Ghost piece marks the exact cells where a hard drop would land the active piece,should,llm-judge,satisfied
+FR-GRID-001,Playfield dimensions,Playfield is 10 cells wide and 20 cells high,must,llm-judge,satisfied
+FR-GRID-002,Cell state,Each cell is either empty or filled with exactly one piece color/type id,must,llm-judge,satisfied
+FR-LEVEL-001,Level increases every 10 lines,Level increments by one each time cumulative cleared lines cross the next multiple of 10,must,llm-judge,satisfied
+FR-LIFE-002,Start spawns first piece + gravity,Triggering Start spawns the first tetromino top-center and begins the gravity timer,must,llm-judge,satisfied
+FR-LIFE-004,Pause stops fall and timer,Pausing stops the active piece from falling and stops the gravity timer,must,llm-judge,satisfied
+FR-LIFE-005,Pause ignores gameplay input,While paused all input except Resume is ignored; board state does not change,must,llm-judge,not-satisfied
+FR-LIFE-006,Resume restores identical state,Resuming continues from the identical board/piece/score/level/lines state before pausing,must,llm-judge,satisfied
+FR-LIFE-007,Restart resets state,Restart after game over resets board/score/level/lines to initial values and starts fresh,must,llm-judge,satisfied
+FR-LIFE-008,Tab blur auto-pause,On tab blur/refocus exactly one loop runs with no runaway timers or skipped-tick avalanche,should,llm-judge,satisfied
+FR-LOCK-001,Lock on landing and spawn next,When the piece can no longer move down it locks into the board and a new piece spawns,must,llm-judge,satisfied
+FR-LOCK-002,Bounded lock delay,Movement/rotation allowed during a bounded ~500 ms lock delay without indefinite stalling,should,llm-judge,not-satisfied
+FR-MOVE-001,Horizontal move by one column,Left/Right moves the piece exactly one column if target cells are empty and in bounds,must,llm-judge,satisfied
+FR-MOVE-002,Blocked horizontal move rejected,A move crossing the boundary or overlapping a locked cell is rejected; piece unchanged,must,llm-judge,satisfied
+FR-MOVE-003,Automatic gravity descent,Active piece descends one cell automatically every gravity tick while running,must,llm-judge,satisfied
+FR-MOVE-004,Soft drop accelerates descent,Holding Soft Drop makes the piece descend faster than normal gravity,must,llm-judge,satisfied
+FR-MOVE-005,Hard drop locks instantly,Hard Drop instantly moves the piece to its landing position and locks it,must,llm-judge,not-satisfied
+FR-OVER-001,Block-out ends game,A newly spawned piece colliding immediately sets status to gameover and stops gravity,must,llm-judge,satisfied
+FR-OVER-002,Game-over screen w/ score + restart,Game-over screen shows the final score and a Restart control,must,llm-judge,satisfied
+FR-OVER-003,No board mutation after game over,Gameplay input that would mutate the board is ignored in game-over state (no zombie moves),must,llm-judge,satisfied
+FR-OVER-004,No spawn after game over until restart,No new piece spawns in game-over state until the user restarts,must,llm-judge,satisfied
+FR-PIECE-001,Seven tetrominoes exist,The seven standard tetrominoes I/O/T/S/Z/L/J exist with correct geometry,must,llm-judge,satisfied
+FR-PIECE-002,Standard colors,Pieces use standard colors: I cyan O yellow T purple S green Z red L orange J blue,should,llm-judge,satisfied
+FR-PIECE-003,Four cells per piece,Every tetromino is composed of exactly four cells in any rotation,must,llm-judge,satisfied
+FR-PIECE-004,Spawn position centered at top,Spawns at top horizontally centered via x = floor(fieldWidth/2) - floor(pieceWidth/2) in standard orientation,must,llm-judge,satisfied
+FR-ROT-001,Rotate 90 about pivot,Rotation turns the piece 90 degrees in the requested direction about its pivot,must,llm-judge,satisfied
+FR-ROT-002,SRS wall kicks,On collision rotation applies the first valid SRS kick-table offset that fits,should,llm-judge,satisfied
+FR-ROT-003,Impossible rotation rejected,If rotation collides and no valid kick exists the rotation is rejected; piece unchanged,must,llm-judge,satisfied
+FR-SCORE-001,Score monotonic and non-negative,Score is monotonically non-decreasing and never negative,must,llm-judge,satisfied
+FR-SCORE-002,Line-clear scoring scale,Awards 100/300/500/800 x level for 1/2/3/4 lines cleared,must,llm-judge,satisfied
+FR-SCORE-003,Lines counter increments exactly,Lines-cleared counter increases by exactly the number of rows cleared on a lock,must,llm-judge,satisfied
+FR-SCORE-004,Soft/hard drop points,Awards 1 point per cell soft-dropped and 2 points per cell hard-dropped,should,llm-judge,partial
+FR-SCORE-005,High score persists across reloads,High score persists via localStorage and is restored after a page reload,should,llm-judge,not-satisfied
+FR-SPAWN-001,7-bag randomizer,Spawn order uses a 7-bag randomizer so each piece appears once per bag (no dup/starve),must,llm-judge,satisfied
+FR-SPAWN-002,Next preview matches spawn,The Next preview piece matches the actual next spawned piece,must,llm-judge,satisfied
+FR-SPAWN-003,Hold swap once per piece,Hold swaps active and held piece at most once per piece until it locks,should,llm-judge,satisfied
+NFR-COMPAT-004,Static HTTPS hosting,Runs over plain HTTPS with no server-side runtime dependency (static-hosting compatible),must,llm-judge,satisfied
+UI-HUD-001,HUD shows/updates score/level/lines,HUD always shows score/level/lines and updates immediately when they change,must,llm-judge,satisfied
+UI-LAYOUT-001,Side panel content,"Side panel shows score, level, lines, Next preview, New Game/Restart, and Game Over indicator",must,llm-judge,partial
