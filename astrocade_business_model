@@ -1,0 +1,27 @@
+You type a prompt → a multi-agent AI system generates a playable HTML5 game (art, audio, mechanics, code).
+The game is published into a vertical, TikTok-style feed of instant-play, portrait, browser games — no download, no install.
+Other users play, rate, remix, and follow.
+
+AI (creation cost → ~0)
+   > CREATORS (anyone, no code)
+      > GAMES (supply: 75k+, growing daily)
+         > FEED / ALGORITHM (zero-friction distribution)
+            > PLAYS & ATTENTION (140M plays/mo)
+               > MONETIZATION (ads / IAP / brands)
+                  > CREATOR PAYOUTS ($10M fund)
+                     ↺ back to CREATORS (more, and better ones)
+
+NEW GAMES (appear constant, increase desire to return) > FEED+ALGORITHM (zero-friction distribution) > AUDIENCE > ADS + IN-GAME PURCHASES + BRAND GAMES > REVENUE SHARE (platform keeps a take rate, creators keep the rest)
+
+The platform becomes a fusion of TOOL (generate a game) and DISTIBUTION CHANNEL (discovery + monetization)
+
+Revenue:
+Rewarded video + interstitial ads  
+In-game purchases / platform currency with a take rate
+Native ads (branded games)
+
+----------
+
+Risks slide:
+Quality floor	AI makes it easy to make a game, not a good game. 
+Unit economics  GPU inference costs. If ad ARPU per play lands below inference cost per play, the model fails arithmetic.
