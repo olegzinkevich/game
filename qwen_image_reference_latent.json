@@ -1,0 +1,2995 @@
+{
+  "id": "8f1d2c64-5b3a-4e9f-a7c2-0d4e6b9a1f35",
+  "revision": 0,
+  "last_node_id": 900,
+  "last_link_id": 62,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "UNETLoader",
+      "pos": [
+        -1200,
+        0
+      ],
+      "size": [
+        340,
+        82
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "unet_name",
+          "type": "COMBO",
+          "link": null,
+          "widget": {
+            "name": "unet_name"
+          }
+        },
+        {
+          "name": "weight_dtype",
+          "type": "COMBO",
+          "link": null,
+          "widget": {
+            "name": "weight_dtype"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            1
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "qwen_image_2.1_int8_convrot.safetensors",
+        "default"
+      ]
+    },
+    {
+      "id": 2,
+      "type": "QwenImage21Cache",
+      "pos": [
+        -1200,
+        130
+      ],
+      "size": [
+        340,
+        82
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 1
+        },
+        {
+          "name": "device",
+          "type": "COMBO",
+          "link": null,
+          "widget": {
+            "name": "device"
+          }
+        },
+        {
+          "name": "dtype",
+          "type": "COMBO",
+          "link": null,
+          "widget": {
+            "name": "dtype"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            6,
+            24,
+            40,
+            56
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "QwenImage21Cache"
+      },
+      "widgets_values": [
+        "auto",
+        "default"
+      ],
+      "title": "Qwen Image 2.1 Cache (device=off if OOM / errors)"
+    },
+    {
+      "id": 3,
+      "type": "CLIPLoader",
+      "pos": [
+        -1200,
+        260
+      ],
+      "size": [
+        340,
+        106
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip_name",
+          "type": "COMBO",
+          "link": null,
+          "widget": {
+            "name": "clip_name"
+          }
+        },
+        {
+          "name": "type",
+          "type": "COMBO",
+          "link": null,
+          "widget": {
+            "name": "type"
+          }
+        },
+        {
+          "name": "device",
+          "type": "COMBO",
+          "link": null,
+          "widget": {
+            "name": "device"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            3,
+            17,
+            33,
+            49
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPLoader"
+      },
+      "widgets_values": [
+        "qwen3vl_8b_int8_convrot.safetensors",
+        "qwen_image",
+        "default"
+      ]
+    },
+    {
+      "id": 4,
+      "type": "VAELoader",
+      "pos": [
+        -1200,
+        410
+      ],
+      "size": [
+        340,
+        58
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "vae_name",
+          "type": "COMBO",
+          "link": null,
+          "widget": {
+            "name": "vae_name"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            4,
+            11,
+            21,
+            29,
+            37,
+            45,
+            53,
+            61
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "qwen_image_2.1_vae_bf16.safetensors"
+      ],
+      "title": "VAE (Qwen 2.1 VAE is RGBA)"
+    },
+    {
+      "id": 5,
+      "type": "LoadImage",
+      "pos": [
+        -760,
+        0
+      ],
+      "size": [
+        340,
+        420
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "COMBO",
+          "link": null,
+          "widget": {
+            "name": "image"
+          }
+        },
+        {
+          "name": "upload",
+          "type": "IMAGEUPLOAD",
+          "link": null,
+          "widget": {
+            "name": "upload"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            2
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "start_image.png",
+        "image"
+      ],
+      "title": "START IMAGE (character in any background)",
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 7,
+      "type": "ImageScaleToTotalPixels",
+      "pos": [
+        -760,
+        470
+      ],
+      "size": [
+        340,
+        106
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 2
+        },
+        {
+          "name": "upscale_method",
+          "type": "COMBO",
+          "link": null,
+          "widget": {
+            "name": "upscale_method"
+          }
+        },
+        {
+          "name": "megapixels",
+          "type": "FLOAT",
+          "link": null,
+          "widget": {
+            "name": "megapixels"
+          }
+        },
+        {
+          "name": "resolution_steps",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "resolution_steps"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            5
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageScaleToTotalPixels"
+      },
+      "widgets_values": [
+        "lanczos",
+        1.0,
+        32
+      ],
+      "title": "-> ~1MP, multiple of 32"
+    },
+    {
+      "id": 30,
+      "type": "TextEncodeQwenImage21",
+      "pos": [
+        -380,
+        0
+      ],
+      "size": [
+        380,
+        300
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 3
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 4
+        },
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "prompt"
+          }
+        },
+        {
+          "name": "negative_prompt",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "negative_prompt"
+          }
+        },
+        {
+          "name": "resolution",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "resolution"
+          }
+        },
+        {
+          "name": "images.image_1",
+          "type": "IMAGE",
+          "link": 5
+        },
+        {
+          "name": "images.image_2",
+          "type": "IMAGE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            7
+          ]
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": [
+            8
+          ]
+        },
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": [
+            9
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "TextEncodeQwenImage21"
+      },
+      "widgets_values": [
+        "Remove the background, and output a PNG image",
+        "",
+        0
+      ],
+      "title": "Cutout - Encode (official background removal prompt)",
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 31,
+      "type": "KSampler",
+      "pos": [
+        40,
+        0
+      ],
+      "size": [
+        300,
+        262
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 6
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 7
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 8
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 9
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "seed"
+          }
+        },
+        {
+          "name": "steps",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "steps"
+          }
+        },
+        {
+          "name": "cfg",
+          "type": "FLOAT",
+          "link": null,
+          "widget": {
+            "name": "cfg"
+          }
+        },
+        {
+          "name": "sampler_name",
+          "type": "COMBO",
+          "link": null,
+          "widget": {
+            "name": "sampler_name"
+          }
+        },
+        {
+          "name": "scheduler",
+          "type": "COMBO",
+          "link": null,
+          "widget": {
+            "name": "scheduler"
+          }
+        },
+        {
+          "name": "denoise",
+          "type": "FLOAT",
+          "link": null,
+          "widget": {
+            "name": "denoise"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            10
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        42,
+        "fixed",
+        25,
+        1,
+        "euler",
+        "simple",
+        1
+      ],
+      "title": "Cutout - KSampler"
+    },
+    {
+      "id": 32,
+      "type": "VAEDecode",
+      "pos": [
+        40,
+        300
+      ],
+      "size": [
+        200,
+        46
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 10
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 11
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            12,
+            13,
+            19,
+            35,
+            51
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      }
+    },
+    {
+      "id": 33,
+      "type": "SaveImage",
+      "pos": [
+        380,
+        0
+      ],
+      "size": [
+        460,
+        360
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 12
+        },
+        {
+          "name": "filename_prefix",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "filename_prefix"
+          }
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "qwen21_char/cutout"
+      ],
+      "title": "CHARACTER CUTOUT (RGBA) -> goes to every scene",
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 34,
+      "type": "SplitImageWithAlpha",
+      "pos": [
+        380,
+        400
+      ],
+      "size": [
+        260,
+        46
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 13
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            22,
+            38,
+            54
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [
+            14
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SplitImageWithAlpha"
+      },
+      "title": "cutout -> RGB + (1-alpha)"
+    },
+    {
+      "id": 35,
+      "type": "InvertMask",
+      "pos": [
+        380,
+        500
+      ],
+      "size": [
+        260,
+        26
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 14
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [
+            23,
+            39,
+            55
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "InvertMask"
+      },
+      "title": "alpha mask (1 = character)"
+    },
+    {
+      "id": 6,
+      "type": "PrimitiveStringMultiline",
+      "pos": [
+        -1200,
+        640
+      ],
+      "size": [
+        340,
+        420
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "value",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "value"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            15,
+            31,
+            47
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PrimitiveStringMultiline"
+      },
+      "widgets_values": [
+        "<image1> is the character reference: a cutout of one single person on a transparent background. Recreate this exact same character with an identical identity: same face and facial features, same skin tone, age and body proportions, same hairstyle and hair color, and the exact same outfit: same garments, cut, fit, fabric, colors, patterns, prints, logos, buttons, seams, shoes, and every accessory and piece of jewelry, nothing added, removed or recolored. Take only identity and appearance from <image1>. Do NOT copy its pose, body position, camera angle or framing. Keep the rendering style of <image1>. Create a brand-new image of this character in the following scene, with a new natural pose and clear movement:"
+      ],
+      "title": "IDENTITY LOCK (shared by all scenes)",
+      "color": "#323",
+      "bgcolor": "#535"
+    },
+    {
+      "id": 100,
+      "type": "PrimitiveStringMultiline",
+      "pos": [
+        -760,
+        760
+      ],
+      "size": [
+        420,
+        260
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "value",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "value"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            16
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PrimitiveStringMultiline"
+      },
+      "widgets_values": [
+        "Scene: a rainy night street in an old European city, wet cobblestones reflecting warm shop lights. Action: the character runs toward the camera, one foot off the ground, arms swinging, holding a folded newspaper over the head against the rain, determined expression. Camera: low three-quarter front angle, full body, slight motion blur on the background. Lighting: warm shop windows and cold blue street lamps."
+      ],
+      "title": "Scene 1 - The arrival | SCENE / PLOT TEXT",
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 101,
+      "type": "StringConcatenate",
+      "pos": [
+        -760,
+        1060
+      ],
+      "size": [
+        420,
+        130
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "string_a",
+          "type": "STRING",
+          "link": 15,
+          "widget": {
+            "name": "string_a"
+          }
+        },
+        {
+          "name": "string_b",
+          "type": "STRING",
+          "link": 16,
+          "widget": {
+            "name": "string_b"
+          }
+        },
+        {
+          "name": "delimiter",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "delimiter"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            18
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "StringConcatenate"
+      },
+      "widgets_values": [
+        "",
+        "",
+        " "
+      ],
+      "title": "Scene 1 - The arrival | identity + scene"
+    },
+    {
+      "id": 102,
+      "type": "EmptyLatentImage",
+      "pos": [
+        -760,
+        1230
+      ],
+      "size": [
+        300,
+        106
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "width"
+          }
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "height"
+          }
+        },
+        {
+          "name": "batch_size",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "batch_size"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            27
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1344,
+        768,
+        1
+      ],
+      "title": "Scene 1 - The arrival | image size (1344x768)"
+    },
+    {
+      "id": 103,
+      "type": "TextEncodeQwenImage21",
+      "pos": [
+        -300,
+        760
+      ],
+      "size": [
+        380,
+        300
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 17
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": null
+        },
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "link": 18,
+          "widget": {
+            "name": "prompt"
+          }
+        },
+        {
+          "name": "negative_prompt",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "negative_prompt"
+          }
+        },
+        {
+          "name": "resolution",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "resolution"
+          }
+        },
+        {
+          "name": "images.image_1",
+          "type": "IMAGE",
+          "link": 19
+        },
+        {
+          "name": "images.image_2",
+          "type": "IMAGE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            20
+          ]
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": [
+            26
+          ]
+        },
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "TextEncodeQwenImage21"
+      },
+      "widgets_values": [
+        "",
+        "",
+        1024
+      ],
+      "title": "Scene 1 - The arrival | Encode: vision tokens (NO vae)",
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 104,
+      "type": "ReferenceLatentPlus",
+      "pos": [
+        120,
+        760
+      ],
+      "size": [
+        380,
+        760
+      ],
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 20
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 21
+        },
+        {
+          "name": "image_1",
+          "type": "IMAGE",
+          "link": 22
+        },
+        {
+          "name": "mask_1",
+          "type": "MASK",
+          "link": 23
+        },
+        {
+          "name": "image_2",
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "mask_2",
+          "type": "MASK",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "links": [
+            25
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ReferenceLatentPlus",
+        "cnr_id": "comfyui-reference-latent-plus",
+        "ver": "1.0.0",
+        "aux_id": "shootthesound/comfyui-ReferenceLatentPlus"
+      },
+      "widgets_values": [
+        1.0,
+        "pixel_grey",
+        null,
+        0.9,
+        false,
+        false,
+        false,
+        false,
+        false,
+        "none",
+        0,
+        0,
+        0.2,
+        1.0,
+        null,
+        0.85,
+        false,
+        false,
+        false,
+        false,
+        false,
+        "none",
+        0,
+        0,
+        0.0,
+        1.0,
+        null,
+        0.85,
+        false,
+        false,
+        false,
+        false,
+        false,
+        "none",
+        0,
+        0,
+        0.0,
+        1.0,
+        null,
+        0.85,
+        false,
+        false,
+        false,
+        false,
+        false,
+        "none",
+        0,
+        0,
+        0.0,
+        1.0
+      ],
+      "title": "Scene 1 - The arrival | Reference Latent+ (adapter)",
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 105,
+      "type": "KSampler",
+      "pos": [
+        540,
+        760
+      ],
+      "size": [
+        300,
+        262
+      ],
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 24
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 25
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 26
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 27
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "seed"
+          }
+        },
+        {
+          "name": "steps",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "steps"
+          }
+        },
+        {
+          "name": "cfg",
+          "type": "FLOAT",
+          "link": null,
+          "widget": {
+            "name": "cfg"
+          }
+        },
+        {
+          "name": "sampler_name",
+          "type": "COMBO",
+          "link": null,
+          "widget": {
+            "name": "sampler_name"
+          }
+        },
+        {
+          "name": "scheduler",
+          "type": "COMBO",
+          "link": null,
+          "widget": {
+            "name": "scheduler"
+          }
+        },
+        {
+          "name": "denoise",
+          "type": "FLOAT",
+          "link": null,
+          "widget": {
+            "name": "denoise"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            28
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        42,
+        "fixed",
+        25,
+        1,
+        "euler",
+        "simple",
+        1
+      ],
+      "title": "Scene 1 - The arrival | KSampler"
+    },
+    {
+      "id": 110,
+      "type": "VAEDecode",
+      "pos": [
+        540,
+        1060
+      ],
+      "size": [
+        200,
+        46
+      ],
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 28
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 29
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            30
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      }
+    },
+    {
+      "id": 111,
+      "type": "SaveImage",
+      "pos": [
+        880,
+        760
+      ],
+      "size": [
+        460,
+        360
+      ],
+      "flags": {},
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 30
+        },
+        {
+          "name": "filename_prefix",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "filename_prefix"
+          }
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "qwen21_char/scene_01"
+      ],
+      "title": "Scene 1 - The arrival | OUTPUT IMAGE 1"
+    },
+    {
+      "id": 120,
+      "type": "PrimitiveStringMultiline",
+      "pos": [
+        -760,
+        1580
+      ],
+      "size": [
+        420,
+        260
+      ],
+      "flags": {},
+      "order": 21,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "value",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "value"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            32
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PrimitiveStringMultiline"
+      },
+      "widgets_values": [
+        "Scene: a dusty attic filled with old trunks and books, sunlight beams through a small round window. Action: the character kneels on one knee, leaning forward, lifting an old wooden box lid with both hands, surprised face lit from below by a golden glow from the box. Camera: side view, medium-full shot. Lighting: dusty volumetric sunbeams, warm glow."
+      ],
+      "title": "Scene 2 - The discovery | SCENE / PLOT TEXT",
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 121,
+      "type": "StringConcatenate",
+      "pos": [
+        -760,
+        1880
+      ],
+      "size": [
+        420,
+        130
+      ],
+      "flags": {},
+      "order": 22,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "string_a",
+          "type": "STRING",
+          "link": 31,
+          "widget": {
+            "name": "string_a"
+          }
+        },
+        {
+          "name": "string_b",
+          "type": "STRING",
+          "link": 32,
+          "widget": {
+            "name": "string_b"
+          }
+        },
+        {
+          "name": "delimiter",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "delimiter"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            34
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "StringConcatenate"
+      },
+      "widgets_values": [
+        "",
+        "",
+        " "
+      ],
+      "title": "Scene 2 - The discovery | identity + scene"
+    },
+    {
+      "id": 122,
+      "type": "EmptyLatentImage",
+      "pos": [
+        -760,
+        2050
+      ],
+      "size": [
+        300,
+        106
+      ],
+      "flags": {},
+      "order": 23,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "width"
+          }
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "height"
+          }
+        },
+        {
+          "name": "batch_size",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "batch_size"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            43
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1344,
+        768,
+        1
+      ],
+      "title": "Scene 2 - The discovery | image size (1344x768)"
+    },
+    {
+      "id": 123,
+      "type": "TextEncodeQwenImage21",
+      "pos": [
+        -300,
+        1580
+      ],
+      "size": [
+        380,
+        300
+      ],
+      "flags": {},
+      "order": 24,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 33
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": null
+        },
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "link": 34,
+          "widget": {
+            "name": "prompt"
+          }
+        },
+        {
+          "name": "negative_prompt",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "negative_prompt"
+          }
+        },
+        {
+          "name": "resolution",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "resolution"
+          }
+        },
+        {
+          "name": "images.image_1",
+          "type": "IMAGE",
+          "link": 35
+        },
+        {
+          "name": "images.image_2",
+          "type": "IMAGE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            36
+          ]
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": [
+            42
+          ]
+        },
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "TextEncodeQwenImage21"
+      },
+      "widgets_values": [
+        "",
+        "",
+        1024
+      ],
+      "title": "Scene 2 - The discovery | Encode: vision tokens (NO vae)",
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 124,
+      "type": "ReferenceLatentPlus",
+      "pos": [
+        120,
+        1580
+      ],
+      "size": [
+        380,
+        760
+      ],
+      "flags": {},
+      "order": 25,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 36
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 37
+        },
+        {
+          "name": "image_1",
+          "type": "IMAGE",
+          "link": 38
+        },
+        {
+          "name": "mask_1",
+          "type": "MASK",
+          "link": 39
+        },
+        {
+          "name": "image_2",
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "mask_2",
+          "type": "MASK",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "links": [
+            41
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ReferenceLatentPlus",
+        "cnr_id": "comfyui-reference-latent-plus",
+        "ver": "1.0.0",
+        "aux_id": "shootthesound/comfyui-ReferenceLatentPlus"
+      },
+      "widgets_values": [
+        1.0,
+        "pixel_grey",
+        null,
+        0.9,
+        false,
+        false,
+        false,
+        false,
+        false,
+        "none",
+        0,
+        0,
+        0.2,
+        1.0,
+        null,
+        0.85,
+        false,
+        false,
+        false,
+        false,
+        false,
+        "none",
+        0,
+        0,
+        0.0,
+        1.0,
+        null,
+        0.85,
+        false,
+        false,
+        false,
+        false,
+        false,
+        "none",
+        0,
+        0,
+        0.0,
+        1.0,
+        null,
+        0.85,
+        false,
+        false,
+        false,
+        false,
+        false,
+        "none",
+        0,
+        0,
+        0.0,
+        1.0
+      ],
+      "title": "Scene 2 - The discovery | Reference Latent+ (adapter)",
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 125,
+      "type": "KSampler",
+      "pos": [
+        540,
+        1580
+      ],
+      "size": [
+        300,
+        262
+      ],
+      "flags": {},
+      "order": 26,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 40
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 41
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 42
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 43
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "seed"
+          }
+        },
+        {
+          "name": "steps",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "steps"
+          }
+        },
+        {
+          "name": "cfg",
+          "type": "FLOAT",
+          "link": null,
+          "widget": {
+            "name": "cfg"
+          }
+        },
+        {
+          "name": "sampler_name",
+          "type": "COMBO",
+          "link": null,
+          "widget": {
+            "name": "sampler_name"
+          }
+        },
+        {
+          "name": "scheduler",
+          "type": "COMBO",
+          "link": null,
+          "widget": {
+            "name": "scheduler"
+          }
+        },
+        {
+          "name": "denoise",
+          "type": "FLOAT",
+          "link": null,
+          "widget": {
+            "name": "denoise"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            44
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        42,
+        "fixed",
+        25,
+        1,
+        "euler",
+        "simple",
+        1
+      ],
+      "title": "Scene 2 - The discovery | KSampler"
+    },
+    {
+      "id": 130,
+      "type": "VAEDecode",
+      "pos": [
+        540,
+        1880
+      ],
+      "size": [
+        200,
+        46
+      ],
+      "flags": {},
+      "order": 27,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 44
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 45
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            46
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      }
+    },
+    {
+      "id": 131,
+      "type": "SaveImage",
+      "pos": [
+        880,
+        1580
+      ],
+      "size": [
+        460,
+        360
+      ],
+      "flags": {},
+      "order": 28,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 46
+        },
+        {
+          "name": "filename_prefix",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "filename_prefix"
+          }
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "qwen21_char/scene_02"
+      ],
+      "title": "Scene 2 - The discovery | OUTPUT IMAGE 2"
+    },
+    {
+      "id": 140,
+      "type": "PrimitiveStringMultiline",
+      "pos": [
+        -760,
+        2400
+      ],
+      "size": [
+        420,
+        260
+      ],
+      "flags": {},
+      "order": 29,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "value",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "value"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            48
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PrimitiveStringMultiline"
+      },
+      "widgets_values": [
+        "Scene: a crowded open-air market at midday, colorful fabric awnings and fruit stalls. Action: the character jumps over a stack of crates in mid-air, body turned, looking back over the shoulder, one hand reaching forward. Camera: dynamic wide shot from behind and slightly below, full body visible. Lighting: bright harsh midday sun, strong shadows."
+      ],
+      "title": "Scene 3 - The chase | SCENE / PLOT TEXT",
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 141,
+      "type": "StringConcatenate",
+      "pos": [
+        -760,
+        2700
+      ],
+      "size": [
+        420,
+        130
+      ],
+      "flags": {},
+      "order": 30,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "string_a",
+          "type": "STRING",
+          "link": 47,
+          "widget": {
+            "name": "string_a"
+          }
+        },
+        {
+          "name": "string_b",
+          "type": "STRING",
+          "link": 48,
+          "widget": {
+            "name": "string_b"
+          }
+        },
+        {
+          "name": "delimiter",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "delimiter"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            50
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "StringConcatenate"
+      },
+      "widgets_values": [
+        "",
+        "",
+        " "
+      ],
+      "title": "Scene 3 - The chase | identity + scene"
+    },
+    {
+      "id": 142,
+      "type": "EmptyLatentImage",
+      "pos": [
+        -760,
+        2870
+      ],
+      "size": [
+        300,
+        106
+      ],
+      "flags": {},
+      "order": 31,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "width"
+          }
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "height"
+          }
+        },
+        {
+          "name": "batch_size",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "batch_size"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            59
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1344,
+        768,
+        1
+      ],
+      "title": "Scene 3 - The chase | image size (1344x768)"
+    },
+    {
+      "id": 143,
+      "type": "TextEncodeQwenImage21",
+      "pos": [
+        -300,
+        2400
+      ],
+      "size": [
+        380,
+        300
+      ],
+      "flags": {},
+      "order": 32,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 49
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": null
+        },
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "link": 50,
+          "widget": {
+            "name": "prompt"
+          }
+        },
+        {
+          "name": "negative_prompt",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "negative_prompt"
+          }
+        },
+        {
+          "name": "resolution",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "resolution"
+          }
+        },
+        {
+          "name": "images.image_1",
+          "type": "IMAGE",
+          "link": 51
+        },
+        {
+          "name": "images.image_2",
+          "type": "IMAGE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            52
+          ]
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": [
+            58
+          ]
+        },
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "TextEncodeQwenImage21"
+      },
+      "widgets_values": [
+        "",
+        "",
+        1024
+      ],
+      "title": "Scene 3 - The chase | Encode: vision tokens (NO vae)",
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 144,
+      "type": "ReferenceLatentPlus",
+      "pos": [
+        120,
+        2400
+      ],
+      "size": [
+        380,
+        760
+      ],
+      "flags": {},
+      "order": 33,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 52
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 53
+        },
+        {
+          "name": "image_1",
+          "type": "IMAGE",
+          "link": 54
+        },
+        {
+          "name": "mask_1",
+          "type": "MASK",
+          "link": 55
+        },
+        {
+          "name": "image_2",
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "mask_2",
+          "type": "MASK",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "links": [
+            57
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ReferenceLatentPlus",
+        "cnr_id": "comfyui-reference-latent-plus",
+        "ver": "1.0.0",
+        "aux_id": "shootthesound/comfyui-ReferenceLatentPlus"
+      },
+      "widgets_values": [
+        1.0,
+        "pixel_grey",
+        null,
+        0.9,
+        false,
+        false,
+        false,
+        false,
+        false,
+        "none",
+        0,
+        0,
+        0.2,
+        1.0,
+        null,
+        0.85,
+        false,
+        false,
+        false,
+        false,
+        false,
+        "none",
+        0,
+        0,
+        0.0,
+        1.0,
+        null,
+        0.85,
+        false,
+        false,
+        false,
+        false,
+        false,
+        "none",
+        0,
+        0,
+        0.0,
+        1.0,
+        null,
+        0.85,
+        false,
+        false,
+        false,
+        false,
+        false,
+        "none",
+        0,
+        0,
+        0.0,
+        1.0
+      ],
+      "title": "Scene 3 - The chase | Reference Latent+ (adapter)",
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 145,
+      "type": "KSampler",
+      "pos": [
+        540,
+        2400
+      ],
+      "size": [
+        300,
+        262
+      ],
+      "flags": {},
+      "order": 34,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 56
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 57
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 58
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 59
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "seed"
+          }
+        },
+        {
+          "name": "steps",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "steps"
+          }
+        },
+        {
+          "name": "cfg",
+          "type": "FLOAT",
+          "link": null,
+          "widget": {
+            "name": "cfg"
+          }
+        },
+        {
+          "name": "sampler_name",
+          "type": "COMBO",
+          "link": null,
+          "widget": {
+            "name": "sampler_name"
+          }
+        },
+        {
+          "name": "scheduler",
+          "type": "COMBO",
+          "link": null,
+          "widget": {
+            "name": "scheduler"
+          }
+        },
+        {
+          "name": "denoise",
+          "type": "FLOAT",
+          "link": null,
+          "widget": {
+            "name": "denoise"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            60
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        42,
+        "fixed",
+        25,
+        1,
+        "euler",
+        "simple",
+        1
+      ],
+      "title": "Scene 3 - The chase | KSampler"
+    },
+    {
+      "id": 150,
+      "type": "VAEDecode",
+      "pos": [
+        540,
+        2700
+      ],
+      "size": [
+        200,
+        46
+      ],
+      "flags": {},
+      "order": 35,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 60
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 61
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            62
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      }
+    },
+    {
+      "id": 151,
+      "type": "SaveImage",
+      "pos": [
+        880,
+        2400
+      ],
+      "size": [
+        460,
+        360
+      ],
+      "flags": {},
+      "order": 36,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 62
+        },
+        {
+          "name": "filename_prefix",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "filename_prefix"
+          }
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "qwen21_char/scene_03"
+      ],
+      "title": "Scene 3 - The chase | OUTPUT IMAGE 3"
+    },
+    {
+      "id": 900,
+      "type": "MarkdownNote",
+      "pos": [
+        -1720,
+        0
+      ],
+      "size": [
+        480,
+        760
+      ],
+      "flags": {},
+      "order": 37,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "MarkdownNote"
+      },
+      "widgets_values": [
+        "## Start image -> cutout -> 3 scenes (Reference Latent+)\n\nNeeds the custom node **comfyui-ReferenceLatentPlus** (github.com/shootthesound/comfyui-ReferenceLatentPlus). mediapipe is NOT needed here: the mask comes from the cutout's alpha.\n\n1. **START IMAGE**: the character in any background.\n2. **Cutout**: Qwen 2.1's own background removal (official prompt \"Remove the background, and output a PNG image\"). The Qwen 2.1 VAE is RGBA, so the result is a real transparent PNG, saved as `qwen21_char/cutout`. **Check it.**\n3. **3 scenes**: each is a separate image with its own size node. The cutout goes to every scene:\n   - into the encoder (vae NOT connected) -> vision tokens, semantic identity;\n   - into Reference Latent+ with its alpha as `mask_1` (grey outside the character) -> detail latents, strength 0.9, active from 0.2 to 1.0.\n\nPose copied? raise `image1_start_percent` (0.3-0.5). Details drift? lower it (0.1) or raise strength (1.0-1.2).\nAlready have a cutout PNG? Load it and connect it where `VAEDecode` (cutout) goes.\n"
+      ],
+      "title": "README"
+    }
+  ],
+  "links": [
+    [
+      1,
+      1,
+      0,
+      2,
+      0,
+      "MODEL"
+    ],
+    [
+      2,
+      5,
+      0,
+      7,
+      0,
+      "IMAGE"
+    ],
+    [
+      3,
+      3,
+      0,
+      30,
+      0,
+      "CLIP"
+    ],
+    [
+      4,
+      4,
+      0,
+      30,
+      1,
+      "VAE"
+    ],
+    [
+      5,
+      7,
+      0,
+      30,
+      5,
+      "IMAGE"
+    ],
+    [
+      6,
+      2,
+      0,
+      31,
+      0,
+      "MODEL"
+    ],
+    [
+      7,
+      30,
+      0,
+      31,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      8,
+      30,
+      1,
+      31,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      9,
+      30,
+      2,
+      31,
+      3,
+      "LATENT"
+    ],
+    [
+      10,
+      31,
+      0,
+      32,
+      0,
+      "LATENT"
+    ],
+    [
+      11,
+      4,
+      0,
+      32,
+      1,
+      "VAE"
+    ],
+    [
+      12,
+      32,
+      0,
+      33,
+      0,
+      "IMAGE"
+    ],
+    [
+      13,
+      32,
+      0,
+      34,
+      0,
+      "IMAGE"
+    ],
+    [
+      14,
+      34,
+      1,
+      35,
+      0,
+      "MASK"
+    ],
+    [
+      15,
+      6,
+      0,
+      101,
+      0,
+      "STRING"
+    ],
+    [
+      16,
+      100,
+      0,
+      101,
+      1,
+      "STRING"
+    ],
+    [
+      17,
+      3,
+      0,
+      103,
+      0,
+      "CLIP"
+    ],
+    [
+      18,
+      101,
+      0,
+      103,
+      2,
+      "STRING"
+    ],
+    [
+      19,
+      32,
+      0,
+      103,
+      5,
+      "IMAGE"
+    ],
+    [
+      20,
+      103,
+      0,
+      104,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      21,
+      4,
+      0,
+      104,
+      1,
+      "VAE"
+    ],
+    [
+      22,
+      34,
+      0,
+      104,
+      2,
+      "IMAGE"
+    ],
+    [
+      23,
+      35,
+      0,
+      104,
+      3,
+      "MASK"
+    ],
+    [
+      24,
+      2,
+      0,
+      105,
+      0,
+      "MODEL"
+    ],
+    [
+      25,
+      104,
+      0,
+      105,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      26,
+      103,
+      1,
+      105,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      27,
+      102,
+      0,
+      105,
+      3,
+      "LATENT"
+    ],
+    [
+      28,
+      105,
+      0,
+      110,
+      0,
+      "LATENT"
+    ],
+    [
+      29,
+      4,
+      0,
+      110,
+      1,
+      "VAE"
+    ],
+    [
+      30,
+      110,
+      0,
+      111,
+      0,
+      "IMAGE"
+    ],
+    [
+      31,
+      6,
+      0,
+      121,
+      0,
+      "STRING"
+    ],
+    [
+      32,
+      120,
+      0,
+      121,
+      1,
+      "STRING"
+    ],
+    [
+      33,
+      3,
+      0,
+      123,
+      0,
+      "CLIP"
+    ],
+    [
+      34,
+      121,
+      0,
+      123,
+      2,
+      "STRING"
+    ],
+    [
+      35,
+      32,
+      0,
+      123,
+      5,
+      "IMAGE"
+    ],
+    [
+      36,
+      123,
+      0,
+      124,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      37,
+      4,
+      0,
+      124,
+      1,
+      "VAE"
+    ],
+    [
+      38,
+      34,
+      0,
+      124,
+      2,
+      "IMAGE"
+    ],
+    [
+      39,
+      35,
+      0,
+      124,
+      3,
+      "MASK"
+    ],
+    [
+      40,
+      2,
+      0,
+      125,
+      0,
+      "MODEL"
+    ],
+    [
+      41,
+      124,
+      0,
+      125,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      42,
+      123,
+      1,
+      125,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      43,
+      122,
+      0,
+      125,
+      3,
+      "LATENT"
+    ],
+    [
+      44,
+      125,
+      0,
+      130,
+      0,
+      "LATENT"
+    ],
+    [
+      45,
+      4,
+      0,
+      130,
+      1,
+      "VAE"
+    ],
+    [
+      46,
+      130,
+      0,
+      131,
+      0,
+      "IMAGE"
+    ],
+    [
+      47,
+      6,
+      0,
+      141,
+      0,
+      "STRING"
+    ],
+    [
+      48,
+      140,
+      0,
+      141,
+      1,
+      "STRING"
+    ],
+    [
+      49,
+      3,
+      0,
+      143,
+      0,
+      "CLIP"
+    ],
+    [
+      50,
+      141,
+      0,
+      143,
+      2,
+      "STRING"
+    ],
+    [
+      51,
+      32,
+      0,
+      143,
+      5,
+      "IMAGE"
+    ],
+    [
+      52,
+      143,
+      0,
+      144,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      53,
+      4,
+      0,
+      144,
+      1,
+      "VAE"
+    ],
+    [
+      54,
+      34,
+      0,
+      144,
+      2,
+      "IMAGE"
+    ],
+    [
+      55,
+      35,
+      0,
+      144,
+      3,
+      "MASK"
+    ],
+    [
+      56,
+      2,
+      0,
+      145,
+      0,
+      "MODEL"
+    ],
+    [
+      57,
+      144,
+      0,
+      145,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      58,
+      143,
+      1,
+      145,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      59,
+      142,
+      0,
+      145,
+      3,
+      "LATENT"
+    ],
+    [
+      60,
+      145,
+      0,
+      150,
+      0,
+      "LATENT"
+    ],
+    [
+      61,
+      4,
+      0,
+      150,
+      1,
+      "VAE"
+    ],
+    [
+      62,
+      150,
+      0,
+      151,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "title": "Models + shared",
+      "bounding": [
+        -1220,
+        -40,
+        380,
+        1120
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 2,
+      "title": "Stage 1: start image -> character cutout",
+      "bounding": [
+        -780,
+        -40,
+        1640,
+        660
+      ],
+      "color": "#8A8",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 3,
+      "title": "Stage 2: 3 separate scene images (cutout as reference)",
+      "bounding": [
+        -780,
+        700,
+        2140,
+        2460
+      ],
+      "color": "#b06634",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.5,
+      "offset": [
+        1800,
+        300
+      ]
+    }
+  },
+  "version": 0.4
+}
